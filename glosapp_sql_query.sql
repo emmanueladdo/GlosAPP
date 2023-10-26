@@ -23,7 +23,7 @@ INSERT INTO `glosapp`.`uom` (`uom_id`, `uom_name`) VALUES ('2', 'kg');
 -- creates a foreign key for unit of measurement in products table
 ALTER TABLE `glosapp`.`products`
 ADD INDEX `fk_uom_id_idx` (`uom_id` ASC) VISIBLE;
-;
+
 ALTER TABLE `glosapp`.`products`
 ADD CONSTRAINT `fk_uom_id`
   FOREIGN KEY (`uom_id`)
