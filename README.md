@@ -1,3 +1,2 @@
---- GLOSAPP ---
-The glosapp is a glocery store management wepp App
-
+# GLOSAPP :busket:
+The glosapp is a grocery store management web App
