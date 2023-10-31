@@ -2,8 +2,7 @@
 """
 This module defines the function to manage product
 """
-from sql_connection import get_sql_connection
-
+from DB_connections import get_sql_conn
 
 def get_all_products_info(connection):
     """
@@ -28,7 +27,7 @@ def get_all_products_info(connection):
     for (product_id, product_name, uom_id, price_per_unit, uom_name) in cursor:
         response.append({
             'product_id': product_id,
-            'product_name': name,
+            'product_name': product_name,
             'uom_id': uom_id,
             'price_per_unit': price_per_unit,
             'uom_name': uom_name
@@ -49,7 +48,7 @@ def add_new_product(connection, product):
     """
     cursor = connection.cursor()
     query = ("INSERT INTO products "
-             "(name, uom_id, price_per_unit)"
+             "(product_name, uom_id, price_per_unit)"
              "VALUES (%s, %s, %s)")
     data = (
         product['product_name'],
@@ -80,10 +79,10 @@ def remove_product(connection, product_id):
 
 
 if __name__ == '__main__':
-    connection = get_sql_connection()
+    connection = get_sql_conn()
     # Example usage
     # print(get_all_products(connection))
-    print(insert_new_product(connection, {
+    print(add_new_product(connection, {
         'product_name': 'Fanyogo Strawbery 145ml',
         'uom_id': '1',
         'price_per_unit': 3
