@@ -4,6 +4,7 @@ This module defines the function to manage product
 """
 from DB_connections import get_sql_conn
 
+
 def get_all_products_info(connection):
     """
     Retrieve information about all products in the database.
