@@ -2,7 +2,7 @@
 """
 This module defines the function to manage product
 """
-from DB_connections import get_sql_conn
+from DB_connections import get_sql_connection
 
 
 def get_all_products_info(connection):
@@ -80,7 +80,7 @@ def remove_product(connection, product_id):
 
 
 if __name__ == '__main__':
-    connection = get_sql_conn()
+    connection = get_sql_connection()
     # Example usage
     # print(get_all_products(connection))
     print(add_new_product(connection, {
