@@ -6,7 +6,7 @@ import json
 
 import products
 import orders
-import uom
+import uoms
 
 app = Flask(__name__)
 
@@ -21,7 +21,7 @@ def get_uom():
     Returns:
         JSON response with UOM data.
     """
-    response = uom.get_uoms(connection)
+    response = uoms.get_uoms(connection)
     response = jsonify(response)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
