@@ -83,7 +83,7 @@ def retrieve_order_details(connection, order_id):
     return records
 
 
-def retrieve_all_orders(connection):
+def get_all_orders(connection):
     """
     Retrieve information about all orders in the database.
 
@@ -115,7 +115,7 @@ def retrieve_all_orders(connection):
 
 if __name__ == '__main__':
     connection = get_sql_connection()
-    print(retrieve_all_orders(connection))
+    print(get_all_orders(connection))
     # Example usage:
     # print(retrieve_order_details(connection, 4))
     # print(create_order(connection, {
