@@ -99,4 +99,4 @@ def delete_product():
 
 if __name__ == "__main__":
     print("Starting GlosAPP")
-    app.run(port=5000)
+    app.run(port=5005)
