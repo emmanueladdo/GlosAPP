@@ -50,7 +50,7 @@ def insert_product():
         JSON response with the product ID.
     """
     request_payload = json.loads(request.form['data'])
-    product_id = products.insert_new_product(connection, request_payload)
+    product_id = products.add_new_product(connection, request_payload)
     response = jsonify({'product_id': product_id})
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
