@@ -17,7 +17,7 @@ def get_all_products(connection):
     """
     cursor = connection.cursor()
     query = (
-        "select products.product_id, products.name, "
+        "select products.product_id, products.product_name, "
         "products.uom_id, products.price_per_unit, "
         "uom.uom_name "
         "from products "
