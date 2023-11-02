@@ -27,7 +27,7 @@ def get_uoms(connection):
 
 
 if __name__ == '__main__':
-    from sql_connection import get_sql_connection
+    from DB_connections import get_sql_connection
 
     connection = get_sql_connection()
     # Example usage:

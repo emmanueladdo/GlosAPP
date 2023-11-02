@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 from flask import Flask, request, jsonify
-import mysql.connector
 from DB_connections import get_sql_connection
 import json
-
 import products
 import orders
 import uoms
@@ -79,7 +77,7 @@ def insert_order():
         JSON response with the order ID.
     """
     request_payload = json.loads(request.form['data'])
-    order_id = orders.insert_order(connection, request_payload)
+    order_id = orders.create_order(connection, request_payload)
     response = jsonify({'order_id': order_id})
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
@@ -93,7 +91,7 @@ def delete_product():
     Returns:
         JSON response with the product ID.
     """
-    return_id = products.delete_product(connection, request.form['product_id'])
+    return_id = products.remove_product(connection, request.form['product_id'])
     response = jsonify({'product_id': return_id})
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
