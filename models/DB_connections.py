@@ -17,7 +17,7 @@ def get_sql_connection():
     if __connection is None:
         __connection = connect(
             user="root",
-            password="root",
+            password="1@werty.coM",
             host="127.0.0.1",
             database="glosapp",
             port="3305"
