@@ -33,6 +33,7 @@ def get_all_products(connection):
             'price_per_unit': price_per_unit,
             'uom_name': uom_name
         })
+    cursor.close()
     return response
 
 
@@ -56,9 +57,14 @@ def add_new_product(connection, product):
         product['uom_id'],
         product['price_per_unit']
     )
-    cursor.execute(query, data)
-    connection.commit()
-    return cursor.lastrowid
+
+    try:
+        cursor.execute(query, data)
+        connection.commit()
+        return cursor.lastrowid
+    except Exception as e:
+        # Handle the exception, e.g., log the error or return None
+        return None
 
 
 def remove_product(connection, product_id):
@@ -73,10 +79,16 @@ def remove_product(connection, product_id):
         The ID of the removed product.
     """
     cursor = connection.cursor()
-    query = ("DELETE FROM products where product_id=" + str(product_id))
-    cursor.execute(query)
-    connection.commit()
-    return cursor.lastrowid
+    query = "DELETE FROM products WHERE product_id = %s"
+    data = (product_id, )
+
+    try:
+        cursor.execute(query)
+        connection.commit()
+        return cursor.lastrowid
+    except Exception as e:
+        # Handle the exception, e.g., log the error or return None
+        return None
 
 
 if __name__ == '__main__':
@@ -88,3 +100,7 @@ if __name__ == '__main__':
         'uom_id': '1',
         'price_per_unit': 3
     }))
+    # if product_id is not None:
+    #    print(f"Product added with ID: {product_id}")
+    # else:
+    #    print("Failed to add a product.")

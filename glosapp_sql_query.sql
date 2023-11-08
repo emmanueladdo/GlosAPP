@@ -8,13 +8,15 @@ CREATE TABLE `glosapp`.`products` (
   `product_name` VARCHAR(100) NOT NULL,
   `uom_id` INT NOT NULL,
   `price_per_unit` DOUBLE NOT NULL,
-  PRIMARY KEY (`product_id`));
+  PRIMARY KEY (`product_id`)
+);
 
 -- creates unit of messure  table 
 CREATE TABLE `glosapp`.`uom` (
   `uom_id` INT NOT NULL AUTO_INCREMENT,
   `uom_name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`uom_id`));
+  PRIMARY KEY (`uom_id`)
+);
 
 -- creates the place holder uom 
 INSERT INTO `glosapp`.`uom` (`uom_id`, `uom_name`) VALUES ('1', 'each ');
@@ -37,7 +39,8 @@ CREATE TABLE `glosapp`.`orders` (
   `customer_name` VARCHAR(225) NOT NULL,
   `total` DOUBLE NOT NULL,
   `datetime` DATETIME NOT NULL,
-  PRIMARY KEY (`order_id`));
+  PRIMARY KEY (`order_id`)
+);
 
 -- creates details for orders
 CREATE TABLE `glosapp`.`orders_details` (
@@ -56,4 +59,5 @@ CREATE TABLE `glosapp`.`orders_details` (
     FOREIGN KEY (`product_id`)
     REFERENCES `glosapp`.`products` (`product_id`)
     ON DELETE NO ACTION
-    ON UPDATE RESTRICT);
+    ON UPDATE RESTRICT
+);

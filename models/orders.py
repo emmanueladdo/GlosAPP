@@ -25,26 +25,32 @@ def create_order(connection, order):
                    "VALUES (%s, %s, %s)")
     order_data = (order['customer_name'], order['grand_total'], datetime.now())
 
-    cursor.execute(order_query, order_data)
-    order_id = cursor.lastrowid
+    try:
+        cursor.execute(order_query, order_data)
+        order_id = cursor.lastrowid
 
-    order_details_query = ("INSERT INTO order_details "
-                           "(order_id, product_id, quantity, total_price)"
-                           "VALUES (%s, %s, %s, %s)")
+        order_details_query = (
+            "INSERT INTO order_details "
+            "(order_id, product_id, quantity, total_price)"
+            "VALUES (%s, %s, %s, %s)"
+        )
 
-    order_details_data = []
-    for order_detail_record in order['order_details']:
-        order_details_data.append([
-            order_id,
-            int(order_detail_record['product_id']),
-            float(order_detail_record['quantity']),
-            float(order_detail_record['total_price'])
-        ])
-    cursor.executemany(order_details_query, order_details_data)
+        order_details_data = []
+        for order_detail_record in order['order_details']:
+            order_details_data.append([
+                order_id,
+                int(order_detail_record['product_id']),
+                float(order_detail_record['quantity']),
+                float(order_detail_record['total_price'])
+            ])
+        cursor.executemany(order_details_query, order_details_data)
 
-    connection.commit()
+        connection.commit()
 
-    return order_id
+        return order_id
+    except Exception as e:
+        # Handle the exception, e.g., log the error or return an error response
+        return None
 
 
 def retrieve_order_details(connection, order_id):
