@@ -7,7 +7,7 @@ from datetime import datetime
 from DB_connections import get_sql_connection
 
 
-def create_order(connection, order):
+def insert_order(connection, order):
     """
     Create a new order in the database.
 
@@ -53,7 +53,7 @@ def create_order(connection, order):
         return None
 
 
-def retrieve_order_details(connection, order_id):
+def get_order_details(connection, order_id):
     """
     Retrieve order details for a specific order.
 
@@ -65,6 +65,8 @@ def retrieve_order_details(connection, order_id):
         A list of dictionaries containing order details.
     """
     cursor = connection.cursor()
+
+    query = "SELECT * from order_details where order_id = %s"
 
     query = "SELECT order_details.order_id, order_details.quantity, order_details.total_price, " \
             "products.name, products.price_per_unit FROM order_details LEFT JOIN products on " \
@@ -100,7 +102,7 @@ def get_all_orders(connection):
         A list of dictionaries containing order information.
     """
     cursor = connection.cursor()
-    query = "SELECT * FROM orders"
+    query = ("SELECT * FROM orders")
     cursor.execute(query)
     response = []
     for (order_id, customer_name, total, dt) in cursor:

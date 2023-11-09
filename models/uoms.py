@@ -15,7 +15,7 @@ def get_uoms(connection):
         A list of dictionaries containing UOM information.
     """
     cursor = connection.cursor()
-    query = "SELECT * FROM uom"
+    query = ("SELECT * FROM uom")
 
     try:
         cursor.execute(query)

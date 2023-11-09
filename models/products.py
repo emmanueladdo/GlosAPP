@@ -17,7 +17,7 @@ def get_all_products(connection):
     """
     cursor = connection.cursor()
     query = (
-        "select products.product_id, products.product_name, "
+        "select products.product_id, products.name, "
         "products.uom_id, products.price_per_unit, "
         "uom.uom_name "
         "from products "
@@ -25,10 +25,10 @@ def get_all_products(connection):
     )
     cursor.execute(query)
     response = []
-    for (product_id, product_name, uom_id, price_per_unit, uom_name) in cursor:
+    for (product_id, name, uom_id, price_per_unit, uom_name) in cursor:
         response.append({
             'product_id': product_id,
-            'product_name': product_name,
+            'name': name,
             'uom_id': uom_id,
             'price_per_unit': price_per_unit,
             'uom_name': uom_name
@@ -37,7 +37,7 @@ def get_all_products(connection):
     return response
 
 
-def add_new_product(connection, product):
+def insert_new_product(connection, product):
     """
     Add a new product to the database.
 
@@ -50,7 +50,7 @@ def add_new_product(connection, product):
     """
     cursor = connection.cursor()
     query = ("INSERT INTO products "
-             "(product_name, uom_id, price_per_unit)"
+             "(name, uom_id, price_per_unit)"
              "VALUES (%s, %s, %s)")
     data = (
         product['product_name'],
@@ -67,7 +67,7 @@ def add_new_product(connection, product):
         return None
 
 
-def remove_product(connection, product_id):
+def delete_product(connection, product_id):
     """
     Remove a product from the database.
 
