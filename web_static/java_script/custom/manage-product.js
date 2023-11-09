@@ -6,8 +6,8 @@ var productModal = $("#productModal");
             if(response) {
                 var table = '';
                 $.each(response, function(index, product) {
-                    table += '<tr data-id="'+ product.product_id +'" data-name="'+ product.name +'" data-unit="'+ product.uom_id +'" data-price="'+ product.price_per_unit +'">' +
-                        '<td>'+ product.name +'</td>'+
+                    table += '<tr data-id="'+ product.product_id +'" data-name="'+ product.product_name +'" data-unit="'+ product.uom_id +'" data-price="'+ product.price_per_unit +'">' +
+                        '<td>'+ product.product_name +'</td>'+
                         '<td>'+ product.uom_name +'</td>'+
                         '<td>'+ product.price_per_unit +'</td>'+
                         '<td><span class="btn btn-xs btn-danger delete-product">Delete</span></td></tr>';
@@ -29,7 +29,7 @@ var productModal = $("#productModal");
         for (var i=0;i<data.length;++i) {
             var element = data[i];
             switch(element.name) {
-                case 'name':
+                case 'product_name':
                     requestPayload.product_name = element.value;
                     break;
                 case 'uoms':
@@ -50,7 +50,7 @@ var productModal = $("#productModal");
         var data = {
             product_id : tr.data('id')
         };
-        var isDelete = confirm("Are you sure to delete "+ tr.data('name') +" item?");
+        var isDelete = confirm("Are you sure to delete "+ tr.data('product_name') +" item?");
         if (isDelete) {
             callApi("POST", productDeleteApiUrl, data);
         }
@@ -58,7 +58,7 @@ var productModal = $("#productModal");
 
     productModal.on('hide.bs.modal', function(){
         $("#id").val('0');
-        $("#name, #unit, #price").val('');
+        $("#product_name, #unit, #price").val('');
         productModal.find('.modal-title').text('Add New Product');
     });
 

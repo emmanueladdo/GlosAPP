@@ -7,7 +7,7 @@ $(function () {
         if(response) {
             var options = '<option value="">--Select--</option>';
             $.each(response, function(index, product) {
-                options += '<option value="'+ product.product_id +'">'+ product.name +'</option>';
+                options += '<option value="'+ product.product_id +'">'+ product.product_name +'</option>';
                 productPrices[product.product_id] = product.price_per_unit;
             });
             $(".product-box").find("select").empty().html(options);
@@ -67,7 +67,7 @@ $("#saveOrder").on("click", function(){
                     total_price: null
                 });                
                 break;
-            case 'qty':
+            case 'quantity':
                 lastElement = requestPayload.order_details[requestPayload.order_details.length-1];
                 lastElement.quantity = element.value
                 break;
