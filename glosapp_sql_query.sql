@@ -48,7 +48,6 @@ CREATE TABLE `glosapp`.`orders_details` (
   `product_id` INT NOT NULL,
   `product_quantity` DOUBLE NOT NULL,
   `total_price` DOUBLE NOT NULL,
-  PRIMARY KEY (`order_id`),
   INDEX `fk_product_id_idx` (`product_id` ASC) VISIBLE,
   CONSTRAINT `fk_order_id`
     FOREIGN KEY (`order_id`)
