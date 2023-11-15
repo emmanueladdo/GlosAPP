@@ -80,10 +80,13 @@ def delete_product(connection, product_id):
     """
     cursor = connection.cursor()
     query = ("DELETE FROM products where product_id=" + str(product_id))
-    cursor.execute(query)
-    connection.commit()
-
-    return cursor.lastrowid
+    try:
+        cursor.execute(query)
+        connection.commit()
+        return cursor.lastrowid
+    except Exception as e:
+        # Handle the exception, eg: log the error or return None
+        return None
 
 
 if __name__ == '__main__':
