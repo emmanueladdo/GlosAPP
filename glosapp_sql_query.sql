@@ -43,10 +43,10 @@ CREATE TABLE `glosapp`.`orders` (
 );
 
 -- creates details for orders
-CREATE TABLE `glosapp`.`orders_details` (
+CREATE TABLE `glosapp`.`order_details` (
   `order_id` INT NOT NULL,
   `product_id` INT NOT NULL,
-  `product_quantity` DOUBLE NOT NULL,
+  `quantity` DOUBLE NOT NULL,
   `total_price` DOUBLE NOT NULL,
   INDEX `fk_product_id_idx` (`product_id` ASC) VISIBLE,
   CONSTRAINT `fk_order_id`
@@ -60,3 +60,8 @@ CREATE TABLE `glosapp`.`orders_details` (
     ON DELETE NO ACTION
     ON UPDATE RESTRICT
 );
+
+-- creates user called gstore and grants all privileges of glosapp to it
+CREATE USER 'gstore'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+GRANT ALL PRIVILEGES ON glosapp.* TO 'gstore'@'localhost';
+FLUSH PRIVILEGES;

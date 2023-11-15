@@ -37,7 +37,7 @@ def get_all_products(connection):
     return response
 
 
-def insert_new_product(connection, product):
+def add_new_product(connection, product):
     """
     Add a new product to the database.
 
@@ -79,16 +79,11 @@ def delete_product(connection, product_id):
         The ID of the removed product.
     """
     cursor = connection.cursor()
-    query = "DELETE FROM products WHERE product_id = %s"
-    data = (product_id, )
+    query = ("DELETE FROM products where product_id=" + str(product_id))
+    cursor.execute(query)
+    connection.commit()
 
-    try:
-        cursor.execute(query)
-        connection.commit()
-        return cursor.lastrowid
-    except Exception as e:
-        # Handle the exception, e.g., log the error or return None
-        return None
+    return cursor.lastrowid
 
 
 if __name__ == '__main__':

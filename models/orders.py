@@ -7,7 +7,7 @@ from datetime import datetime
 from DB_connections import get_sql_connection
 
 
-def insert_order(connection, order):
+def create_order(connection, order):
     """
     Create a new order in the database.
 
@@ -117,7 +117,7 @@ def get_all_orders(connection):
 
     # Append order details in each order
     for record in response:
-        record['order_details'] = retrieve_order_details(connection, record['order_id'])
+        record['order_details'] = get_order_details(connection, record['order_id'])
 
     return response
 

@@ -89,7 +89,7 @@ def delete_product():
     Returns:
         JSON response with the product ID.
     """
-    return_id = products.remove_product(connection, request.form['product_id'])
+    return_id = products.delete_product(connection, request.form['product_id'])
     response = {'product_id': return_id}
     return add_cors_headers(jsonify(response))
 
